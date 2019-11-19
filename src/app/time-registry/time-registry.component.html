@@ -1,6 +1,6 @@
 <div class="text-center" style="text-align: center">
-  <button class="mr-2" (click)="getUserRegistries()">See all registries</button>
-  <button class="ml-2" (click)="addRegistry()">Add registry</button>
+  <button class="btn-primary" style="margin-right: 20px" (click)="getUserRegistries()">See all registries</button>
+  <button style="margin-left: 20px" (click)="addRegistry()">Add registry</button>
   <div *ngIf="shouldDisplayRegistries">
     <table>Display table</table>
   </div>

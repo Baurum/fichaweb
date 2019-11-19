@@ -8,6 +8,7 @@ import {AppRouting} from './app.routing';
 import { HeaderComponent } from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { TimeRegistryComponent } from './time-registry/time-registry.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TimeRegistryComponent } from './time-registry/time-registry.component';
     BrowserModule,
     RouterModule,
     AppRouting,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
