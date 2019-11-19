@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="col-12 text-center" style="text-align: center">
+  <p>Have you an account?</p>
+  <button (click)="signUp()">Sign up</button>
+  <button (click)="login()">Login</button>
+  <form *ngIf="loginUser" [formGroup]="loginUserForm">
+    <div class="form-group">
+      <label>
+        <input type="email"
+               class="form-control"
+               formControlName="email"
+               aria-describedby="emailHelp"
+               placeholder="Enter email">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <input type="password"
+               class="form-control"
+               formControlName="password"
+               placeholder="Password">
+      </label>
+    </div>
+    <button class=btn-primary type="submit" (click)="loginRequest()">Go!</button>
+  </form>
+  <form *ngIf="newUser" [formGroup]="newUserForm">
+    <div class="form-group">
+      <label>
+        <input type="email" class="form-control"
+               formControlName="email"
+               aria-describedby="emailHelp"
+               placeholder="Enter email"
+
+        >
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <input type="password" class="form-control"
+               (input)="onPasswordChange()"
+               formControlName="password"
+               placeholder="Password"
+               [ngClass]="fuser.password.errors"
+        >
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <input type="password" class="form-control"
+               (input)="onPasswordChange()"
+               formControlName="passwordConfirmation"
+               placeholder="Confirm password"
+               [ngClass]="fuser.passwordConfirmation.errors"
+        >
+      </label>
+    </div>
+    <div *ngIf="!passwordConfirm">Passwords isn't equals</div>
+    <button class="btn-primary" type="submit" (click)="signUpRequest()">Go!</button>
+  </form>
+</div>
+
