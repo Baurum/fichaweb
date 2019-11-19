@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   newUserForm: FormGroup;
   passwordConfirm: boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.newUserForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit {
    * If response it's successful go to main page
    */
   public loginRequest(): void {
-
+    this.router.navigate(['/time_registry']);
   }
 
   /**
@@ -75,6 +76,7 @@ export class LoginComponent implements OnInit {
    * If response it's successful go to main page
    */
   public signUpRequest(): void {
+    this.router.navigate(['/time_registry']);
 
   }
 }
