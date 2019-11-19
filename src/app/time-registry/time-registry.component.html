@@ -1,3 +1,12 @@
-<p>time-registry works!</p>
-<button (click)="getUserRegistries()">See all registries</button>
-<button (click)="addRegistry()" >Add registry</button>
+<div class="text-center" style="text-align: center">
+  <button class="mr-2" (click)="getUserRegistries()">See all registries</button>
+  <button class="ml-2" (click)="addRegistry()">Add registry</button>
+  <div *ngIf="shouldDisplayRegistries">
+    <table>Display table</table>
+  </div>
+  <div *ngIf="shouldDisplayAddRegistry">
+    Display input form to add new registry
+  </div>
+</div>
+
+

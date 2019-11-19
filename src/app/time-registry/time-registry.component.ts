@@ -6,17 +6,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./time-registry.component.css']
 })
 export class TimeRegistryComponent implements OnInit {
+  shouldDisplayRegistries: boolean;
+  shouldDisplayAddRegistry: boolean;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  getUserRegistries() {
+  /**
+   * Request all user registries and display in a table
+   */
+  public getUserRegistries(): void {
+    this.shouldDisplayRegistries = !this.shouldDisplayRegistries;
+    this.shouldDisplayAddRegistry = false;
 
   }
 
-  addRegistry() {
+  /**
+   * Display form to add new registry.
+   */
+  public addRegistry(): void {
+    this.shouldDisplayAddRegistry = !this.shouldDisplayAddRegistry;
+    this.shouldDisplayRegistries = false;
+  }
+
+  /**
+   * Request to create new registry in the server.
+   */
+  public submit() {
 
   }
 }
