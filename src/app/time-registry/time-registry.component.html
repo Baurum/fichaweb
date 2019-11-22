@@ -1,11 +1,50 @@
-<div class="text-center" style="text-align: center">
-  <button class="btn-primary" style="margin-right: 20px" (click)="getUserRegistries()">See all registries</button>
-  <button style="margin-left: 20px" (click)="addRegistry()">Add registry</button>
-  <div *ngIf="shouldDisplayRegistries">
-    <table class="table table-borderless">Display table</table>
+<div class="text-center container time-registry-container">
+  <div>
+    <button class="btn-info btn-primary mb-2" (click)="addRegistry()">Add registry
+    </button>
   </div>
-  <div  *ngIf="shouldDisplayAddRegistry">
-    Display input form to add new registry
+  <div class="text-center d-inline-block" *ngIf="shouldDisplayAddRegistry">
+    <div class="text-white"> Start time
+      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>
+    </div>
+    <div class="text-white mt-3"> End time
+      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>
+    </div>
+  </div>
+  <div>
+    <button class="btn-info btn-primary mt-3 mb-2"
+            (click)="getUserRegistries()">See all registries
+    </button>
+  </div>
+  <div *ngIf="shouldDisplayRegistries" class="table-container">
+    <div>
+      <table class="table table-borderless mt-3">
+        <thead>
+        <tr>
+          <th scope="col">Registry date</th>
+          <th scope="col">Start time</th>
+          <th scope="col">End time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>22/10/2019</td>
+          <td>08:00</td>
+          <td>18:00</td>
+        </tr>
+        <tr>
+          <td>23/10/2019</td>
+          <td>08:00</td>
+          <td>18:00</td>
+        </tr>
+        <tr>
+          <td>24/10/2019</td>
+          <td>08:00</td>
+          <td>18:00</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
