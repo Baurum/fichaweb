@@ -1,9 +1,11 @@
-<div class="offset-3 col-6 align-content-center text-center shadow"
-     style="text-align: center; border-radius: 24px; background-color: darkseagreen; padding: 24px">
-  <h4 class="text-white">Have you an account?</h4>
-  <button class="btn-info mr-4" (click)="signUp()">Sign up</button>
-  <button class="btn-info btn-primary ml-4 mb-2" (click)="login()">Login</button>
-  <form class="mt-2"  *ngIf="loginUser" [formGroup]="loginUserForm">
+<div class="offset-3 col-6 align-content-center text-center shadow container login-container">
+  <h4 class="text-white">Do you have an account?</h4>
+  <div>
+    <button class="btn-info btn-primary mb-2"
+            (click)="login()">Login
+    </button>
+  </div>
+  <form class="mt-2" *ngIf="loginUser" [formGroup]="loginUserForm">
     <div class="form-group">
       <label>
         <input type="email"
@@ -21,8 +23,17 @@
                placeholder="Password">
       </label>
     </div>
-    <button class="btn-primary rounded-circle" type="submit" (click)="loginRequest()">Go!</button>
+    <button class="btn-primary rounded-circle"
+            type="submit"
+            (click)="loginRequest()">Go!
+    </button>
   </form>
+  <h6 class="text-white">Don't you have any account yet? What are you waiting for to create one?</h6>
+  <div>
+    <button class="btn-link"
+            (click)="signUp()">Sign up
+    </button>
+  </div>
   <form class="mt-2" *ngIf="newUser" [formGroup]="newUserForm">
     <div class="form-group">
       <label>
@@ -38,8 +49,7 @@
                (input)="onPasswordChange()"
                formControlName="password"
                placeholder="Password"
-               [ngClass]="fuser.password.errors"
-        >
+               [ngClass]="fuser.password.errors">
       </label>
     </div>
     <div class="form-group">
@@ -48,12 +58,14 @@
                (input)="onPasswordChange()"
                formControlName="passwordConfirmation"
                placeholder="Confirm password"
-               [ngClass]="fuser.passwordConfirmation.errors"
-        >
+               [ngClass]="fuser.passwordConfirmation.errors">
       </label>
     </div>
     <div class="text-danger" *ngIf="!passwordConfirm">Passwords isn't equals</div>
-    <button class="btn-primary rounded-circle" type="submit" (click)="signUpRequest()">Go!</button>
+    <button class="btn-primary rounded-circle"
+            type="submit"
+            (click)="signUpRequest()">Go!
+    </button>
   </form>
 </div>
 
