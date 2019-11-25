@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {error} from 'util';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,7 @@ export class LoginComponent implements OnInit {
   newUserForm: FormGroup;
   passwordConfirm: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {
     this.newUserForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -28,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.passwordConfirm = true;
-
   }
 
   /**
@@ -68,7 +70,21 @@ export class LoginComponent implements OnInit {
    * If response it's successful go to main page
    */
   public loginRequest(): void {
+    // TODO: only do this when server response with a successful response
     this.router.navigate(['/time_registry']);
+    const body = {
+      email: this.loginUserForm.controls.email.value,
+      password: this.loginUserForm.controls.password.value
+    };
+    console.log(body);
+    this.http.post(environment.API_URL + 'sessions', body)
+      .subscribe((response) => {
+        console.log(response);
+        console.log('Successful user create');
+        this.router.navigate(['/time_registry']);
+      }, err => {
+        console.log('Oooops something wrong');
+      });
   }
 
   /**
@@ -76,7 +92,18 @@ export class LoginComponent implements OnInit {
    * If response it's successful go to main page
    */
   public signUpRequest(): void {
-    this.router.navigate(['/time_registry']);
-
+    const body = {
+      email: this.newUserForm.controls.email.value,
+      password: this.newUserForm.controls.password.value
+    };
+    console.log(body);
+    console.log(environment.API_URL + 'users');
+    this.http.post(environment.API_URL + 'users', body)
+      .subscribe((response) => {
+        console.log(response);
+        console.log('Successful user create');
+      }, err => {
+        console.log('Oooops something wrong');
+      });
   }
 }

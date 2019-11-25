@@ -9,20 +9,22 @@ import { HeaderComponent } from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { TimeRegistryComponent } from './time-registry/time-registry.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HeaderComponent,
-    TimeRegistryComponent,
-  ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRouting,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+  ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HeaderComponent,
+    TimeRegistryComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
