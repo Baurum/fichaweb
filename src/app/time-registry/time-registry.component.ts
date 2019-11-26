@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,6 +13,12 @@ export class TimeRegistryComponent implements OnInit {
   shouldDisplayRegistries: boolean;
   shouldDisplayAddRegistry: boolean;
   displayDate: string;
+
+  httpOptionsAuthToken = {
+    headers: new HttpHeaders({
+      Authorization: localStorage.getItem('token')
+    })
+  };
 
   constructor(private http: HttpClient, private router: Router, private calendar: NgbCalendar) {
   }
@@ -31,7 +37,7 @@ export class TimeRegistryComponent implements OnInit {
     this.shouldDisplayRegistries = !this.shouldDisplayRegistries;
     this.shouldDisplayAddRegistry = false;
     let token = '';
-    this.http.get(environment.API_URL + 'time-registries/')
+    this.http.get(environment.API_URL + 'time-registries/', this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
         console.log('Successful user create');
@@ -62,7 +68,7 @@ export class TimeRegistryComponent implements OnInit {
       entryTime: '08:30',
       exitTime: '14:30'
     };
-    this.http.post(environment.API_URL + '/time-registries/', body)
+    this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
         console.log('Successful user create');
@@ -87,7 +93,7 @@ export class TimeRegistryComponent implements OnInit {
     };
     console.log(body);
     // Create a time registry for current user
-    this.http.post(environment.API_URL + '/time-registries/', body)
+    this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
         console.log('Successful user create');
@@ -111,7 +117,7 @@ export class TimeRegistryComponent implements OnInit {
     };
     console.log(body);
     // Updates the las time registry for current user.
-    this.http.patch(environment.API_URL + '/time-registries/id', body)
+    this.http.patch(environment.API_URL + '/time-registries/id', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
         console.log('Successful user create');
