@@ -18,5 +18,13 @@
 
 .table-container {
   background-color: white;
-  border-radius: 15px
+  border-radius: 15px;
 }
+
+.button-container {
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  padding: 15px
+}
+

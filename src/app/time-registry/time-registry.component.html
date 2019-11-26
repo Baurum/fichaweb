@@ -3,17 +3,18 @@
     <button class="btn-info btn-primary mb-2" (click)="addRegistry()">Add registry
     </button>
   </div>
-  <div class="text-center d-inline-block" *ngIf="shouldDisplayAddRegistry">
-<!--     TODO: With input or buttons-->
-    <button class="btn-info btn-primary mt-2 mb-2" (click)="submit()">Start time</button>
-    <button class="btn-info btn-primary mt-2 mb-2" (click)="submit()">End time</button>
+  <div class="text-center d-inline-block button-container" *ngIf="shouldDisplayAddRegistry">
+    <!--     TODO: With input or buttons-->
+    <p> Today: {{ displayDate }}</p>
+    <button class="btn-info btn-primary ml-4 mr-4 mt-2 mb-2" (click)="submitStartDate()">Start time</button>
+    <button class="btn-info btn-primary ml-4 mr-4 mt-2 mb-2" (click)="submitEndDate()">End time</button>
     <!--    <div class="text-white"> Start time-->
-<!--      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>-->
-<!--    </div>-->
-<!--    <div class="text-white mt-3"> End time-->
-<!--      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>-->
-<!--    </div>-->
-    <button class="btn-info btn-primary mt-2 mb-2" (click)="submit()">Add</button>
+    <!--      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>-->
+    <!--    </div>-->
+    <!--    <div class="text-white mt-3"> End time-->
+    <!--      <ngb-timepicker class="text-center" [spinners]="false" size="small"></ngb-timepicker>-->
+    <!--    </div>-->
+    <!--    <button class="btn-info btn-primary mt-2 mb-2" (click)="submit()">Add</button>-->
   </div>
   <div>
     <button class="btn-info btn-primary mt-3 mb-2"
@@ -50,7 +51,8 @@
       </table>
     </div>
   </div>
-  <h6>Aplicación del RD Ley 8/2019 por el que la empresa debe garantizar el registro diario de inicio y finilacización de la jornada de trabajo.</h6>
+  <h6>Aplicación del RD Ley 8/2019 por el que la empresa debe garantizar el registro diario de inicio y finilacización
+    de la jornada de trabajo.</h6>
 </div>
 
 
