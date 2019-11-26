@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-time-registry',
@@ -11,10 +12,16 @@ import {Router} from '@angular/router';
 export class TimeRegistryComponent implements OnInit {
   shouldDisplayRegistries: boolean;
   shouldDisplayAddRegistry: boolean;
+  displayDate: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private calendar: NgbCalendar) {
+  }
 
   ngOnInit() {
+    this.displayDate = this.calendar.getToday().day.toString() + '/'
+      + this.calendar.getToday().month.toString() + '/'
+      + this.calendar.getToday().year.toString()
+    ;
   }
 
   /**
@@ -45,6 +52,7 @@ export class TimeRegistryComponent implements OnInit {
 
   /**
    * Request to create new registry in the server.
+   * TODO: For future implementation.
    */
   public submit() {
     let token = '';
@@ -62,5 +70,62 @@ export class TimeRegistryComponent implements OnInit {
       }, err => {
         console.log('Oooops something wrong');
       });
+  }
+
+  /**
+   * Entry time request.
+   * This request create a time registry.
+   */
+  private submitStartDate(): void {
+    let token = '';
+    const startTimeHour = new Date().getHours().toString();
+    const startTimeMinutes = new Date().getMinutes().toString();
+    const body = {
+      startDate: this.getToday(),
+      endDate: this.getToday(),
+      entryTime: startTimeHour + ':' + startTimeMinutes,
+    };
+    console.log(body);
+    // Create a time registry for current user
+    this.http.post(environment.API_URL + '/time-registries/', body)
+      .subscribe((response) => {
+        console.log(response);
+        console.log('Successful user create');
+      }, err => {
+        console.log('Oooops something wrong');
+      });
+  }
+
+  /**
+   * Exit time request.
+   * This request update the last created time registry.
+   */
+  public submitEndDate(): void {
+    let token = '';
+    const endTime = new Date().getHours().toString();
+    const endTimeMinutes = new Date().getMinutes().toString();
+    const body = {
+      startDate: this.getToday(),
+      endDate: this.getToday(),
+      exitTime: endTime + ':' + endTimeMinutes
+    };
+    console.log(body);
+    // Updates the las time registry for current user.
+    this.http.patch(environment.API_URL + '/time-registries/id', body)
+      .subscribe((response) => {
+        console.log(response);
+        console.log('Successful user create');
+      }, err => {
+        console.log('Oooops something wrong');
+      });
+  }
+
+  /**
+   * Prettify date to send to server.
+   */
+  private getToday() {
+    return this.calendar.getToday().year.toString() + '-'
+      + this.calendar.getToday().month.toString() + '-'
+      + this.calendar.getToday().day.toString();
   }
 }
