@@ -21,7 +21,7 @@
             (click)="getUserRegistries()">See all registries
     </button>
   </div>
-  <div *ngIf="shouldDisplayRegistries" class="table-container">
+  <div *ngIf="shouldDisplayRegistries && timeRegistries !== undefined" class="table-container">
     <div>
       <table class="table table-borderless mt-3">
         <thead>
@@ -32,20 +32,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>22/10/2019</td>
-          <td>08:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>23/10/2019</td>
-          <td>08:00</td>
-          <td>18:00</td>
-        </tr>
-        <tr>
-          <td>24/10/2019</td>
-          <td>08:00</td>
-          <td>18:00</td>
+        <tr *ngFor="let timeRegistry of timeRegistries">
+          <td>{{timeRegistry.startDate}}</td>
+          <td>{{timeRegistry.entryTime}}</td>
+          <td *ngIf="timeRegistry.exitTime === undefined">Pending Complete</td>
+          <td *ngIf="timeRegistry.exitTime !== ''">{{timeRegistry.exitTime}}</td>
         </tr>
         </tbody>
       </table>
