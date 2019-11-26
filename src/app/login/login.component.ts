@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {error} from 'util';
+import {SessionResponseModel} from '../models/responses/session-response.model';
 
 @Component({
   selector: 'app-login',
@@ -71,7 +72,6 @@ export class LoginComponent implements OnInit {
    */
   public loginRequest(): void {
     // TODO: only do this when server response with a successful response
-    this.router.navigate(['/time_registry']);
     const body = {
       email: this.loginUserForm.controls.email.value,
       password: this.loginUserForm.controls.password.value
@@ -79,10 +79,11 @@ export class LoginComponent implements OnInit {
     console.log(body);
     this.http.post(environment.API_URL + 'sessions', body)
       .subscribe((response) => {
-        console.log(response);
-        console.log('Successful user create');
+        const session = new SessionResponseModel(response);
+        localStorage.setItem('token', session._id);
         this.router.navigate(['/time_registry']);
       }, err => {
+        alert('Email or password invalid');
         console.log('Oooops something wrong');
       });
   }
@@ -100,8 +101,7 @@ export class LoginComponent implements OnInit {
     console.log(environment.API_URL + 'users');
     this.http.post(environment.API_URL + 'users', body)
       .subscribe((response) => {
-        console.log(response);
-        console.log('Successful user create');
+        alert('WELCOME!! Now you can LOGIN :)');
       }, err => {
         console.log('Oooops something wrong');
       });
