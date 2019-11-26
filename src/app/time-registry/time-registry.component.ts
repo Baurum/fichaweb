@@ -3,6 +3,8 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {TimeRegistryModel} from '../models/responses/time-registry.model';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-time-registry',
@@ -13,6 +15,7 @@ export class TimeRegistryComponent implements OnInit {
   shouldDisplayRegistries: boolean;
   shouldDisplayAddRegistry: boolean;
   displayDate: string;
+  timeRegistries: TimeRegistryModel[];
 
   httpOptionsAuthToken = {
     headers: new HttpHeaders({
@@ -36,15 +39,18 @@ export class TimeRegistryComponent implements OnInit {
   public getUserRegistries(): void {
     this.shouldDisplayRegistries = !this.shouldDisplayRegistries;
     this.shouldDisplayAddRegistry = false;
-    let token = '';
-    this.http.get(environment.API_URL + 'time-registries/', this.httpOptionsAuthToken)
-      .subscribe((response) => {
-        console.log(response);
-        console.log('Successful user create');
-        this.router.navigate(['/time_registry']);
-      }, err => {
-        console.log('Oooops something wrong');
-      });
+    this.http.get<TimeRegistryModel[]>(environment.API_URL + 'time-registries/', this.httpOptionsAuthToken)
+      .pipe(
+        map(data => data.map(dataItem => {
+            return new TimeRegistryModel(dataItem);
+          })
+        )
+      ).subscribe((response) => {
+      this.timeRegistries = response;
+      console.log(response);
+    }, err => {
+      console.log('Oooops something wrong');
+    });
 
   }
 
@@ -57,33 +63,10 @@ export class TimeRegistryComponent implements OnInit {
   }
 
   /**
-   * Request to create new registry in the server.
-   * TODO: For future implementation.
-   */
-  public submit() {
-    let token = '';
-    const body = {
-      startDate: '2019-10-10',
-      endDate: '2019-10-10',
-      entryTime: '08:30',
-      exitTime: '14:30'
-    };
-    this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
-      .subscribe((response) => {
-        console.log(response);
-        console.log('Successful user create');
-        this.router.navigate(['/time_registry']);
-      }, err => {
-        console.log('Oooops something wrong');
-      });
-  }
-
-  /**
    * Entry time request.
    * This request create a time registry.
    */
   private submitStartDate(): void {
-    let token = '';
     const startTimeHour = new Date().getHours().toString();
     const startTimeMinutes = new Date().getMinutes().toString();
     const body = {
@@ -93,10 +76,10 @@ export class TimeRegistryComponent implements OnInit {
     };
     console.log(body);
     // Create a time registry for current user
-    this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
+    this.http.post(environment.API_URL + 'time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
-        console.log('Successful user create');
+        console.log('Successful time registry created');
       }, err => {
         console.log('Oooops something wrong');
       });
@@ -107,7 +90,6 @@ export class TimeRegistryComponent implements OnInit {
    * This request update the last created time registry.
    */
   public submitEndDate(): void {
-    let token = '';
     const endTime = new Date().getHours().toString();
     const endTimeMinutes = new Date().getMinutes().toString();
     const body = {
@@ -117,10 +99,10 @@ export class TimeRegistryComponent implements OnInit {
     };
     console.log(body);
     // Updates the las time registry for current user.
-    this.http.patch(environment.API_URL + '/time-registries/id', body, this.httpOptionsAuthToken)
+    this.http.patch(environment.API_URL + 'time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
         console.log(response);
-        console.log('Successful user create');
+        console.log('Successful time registry updated');
       }, err => {
         console.log('Oooops something wrong');
       });
@@ -134,4 +116,26 @@ export class TimeRegistryComponent implements OnInit {
       + this.calendar.getToday().month.toString() + '-'
       + this.calendar.getToday().day.toString();
   }
+
+  // /**
+  //  * Request to create new registry in the server.
+  //  * TODO: For future implementation.
+  //  */
+  // public submit() {
+  //   let token = '';
+  //   const body = {
+  //     startDate: '2019-10-10',
+  //     endDate: '2019-10-10',
+  //     entryTime: '08:30',
+  //     exitTime: '14:30'
+  //   };
+  //   this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //       console.log('Successful user create');
+  //       this.router.navigate(['/time_registry']);
+  //     }, err => {
+  //       console.log('Oooops something wrong');
+  //     });
+  // }
 }
