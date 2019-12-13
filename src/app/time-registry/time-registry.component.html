@@ -35,15 +35,16 @@
         <tr *ngFor="let timeRegistry of timeRegistries">
           <td>{{timeRegistry.startDate}}</td>
           <td>{{timeRegistry.entryTime}}</td>
-          <td *ngIf="timeRegistry.exitTime === undefined">Pending Complete</td>
-          <td *ngIf="timeRegistry.exitTime !== ''">{{timeRegistry.exitTime}}</td>
+          <td *ngIf="timeRegistry.exitTime === ''">Pending Complete</td>
+          <td *ngIf="timeRegistry.exitTime !== undefined">{{timeRegistry.exitTime}}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <h6>Aplicación del RD Ley 8/2019 por el que la empresa debe garantizar el registro diario de inicio y finilacización
+  <h6 class="mb-5">Aplicación del RD Ley 8/2019 por el que la empresa debe garantizar el registro diario de inicio y finalacización
     de la jornada de trabajo.</h6>
 </div>
 
 
+0
