@@ -1,10 +1,10 @@
 {
   "name": "fichaweb",
   "version": "0.0.0",
+  "heroku-run-build-script": true,
   "scripts": {
     "ng": "ng",
     "start": "ng server.js",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -56,6 +56,5 @@
   "engines": {
     "node": "11.9.0",
     "npm": "6.5.0"
-  },
-  "heroku-run-build-script": true
+  }
 }
