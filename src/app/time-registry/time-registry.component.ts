@@ -47,9 +47,8 @@ export class TimeRegistryComponent implements OnInit {
         )
       ).subscribe((response) => {
       this.timeRegistries = response;
-      console.log(response);
     }, err => {
-      console.log('Oooops something wrong');
+      alert('Oooops something wrong');
     });
 
   }
@@ -81,14 +80,12 @@ export class TimeRegistryComponent implements OnInit {
       entryTime: startTimeHour + ':' + startTimeMinutes,
       exitTime: ''
     };
-    console.log(body);
     // Create a time registry for current user
     this.http.post(environment.API_URL + 'time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
-        console.log(response);
-        console.log('Successful time registry created');
+        alert('Successful time registry created');
       }, err => {
-        console.log('Oooops something wrong');
+        alert('Oooops something wrong');
       });
   }
 
@@ -111,14 +108,12 @@ export class TimeRegistryComponent implements OnInit {
       entryTime: '',
       exitTime: endTime + ':' + endTimeMinutes
     };
-    console.log(body);
     // Updates the las time registry for current user.
     this.http.patch(environment.API_URL + 'time-registries/', body, this.httpOptionsAuthToken)
       .subscribe((response) => {
-        console.log(response);
-        console.log('Successful time registry updated');
+        alert('Successful time registry updated');
       }, err => {
-        console.log('Oooops something wrong');
+        alert('Oooops something wrong');
       });
   }
 

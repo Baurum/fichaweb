@@ -76,7 +76,6 @@ export class LoginComponent implements OnInit {
       email: this.loginUserForm.controls.email.value,
       password: this.loginUserForm.controls.password.value
     };
-    console.log(body);
     this.http.post(environment.API_URL + 'sessions', body)
       .subscribe((response) => {
         const session = new SessionResponseModel(response);
@@ -84,7 +83,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/time_registry']);
       }, err => {
         alert('Email or password invalid');
-        console.log('Oooops something wrong');
       });
   }
 
@@ -97,13 +95,11 @@ export class LoginComponent implements OnInit {
       email: this.newUserForm.controls.email.value,
       password: this.newUserForm.controls.password.value
     };
-    console.log(body);
-    console.log(environment.API_URL + 'users');
     this.http.post(environment.API_URL + 'users', body)
       .subscribe((response) => {
         alert('WELCOME!! Now you can LOGIN :)');
       }, err => {
-        console.log('Oooops something wrong');
+        alert('Oooops something wrong');
       });
   }
 }
