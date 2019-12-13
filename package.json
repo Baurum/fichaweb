@@ -4,7 +4,7 @@
   "heroku-run-build-script": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng server.js",
+    "start": "node src/index.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
