@@ -2,8 +2,7 @@
   margin-right: 10px;
   margin-left: 10px;
   background-color: darkseagreen;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
   width: 100%;
   height: 60px;
   line-height: 60px;

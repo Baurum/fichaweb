@@ -68,11 +68,18 @@ export class TimeRegistryComponent implements OnInit {
    */
   private submitStartDate(): void {
     const startTimeHour = new Date().getHours().toString();
-    const startTimeMinutes = new Date().getMinutes().toString();
+    const currentStartDateMinutes = new Date().getMinutes();
+    let startTimeMinutes = '';
+    if (currentStartDateMinutes < 10) {
+      startTimeMinutes = '0' +  new Date().getMinutes().toString();
+    } else {
+      startTimeMinutes = new Date().getMinutes().toString();
+    }
     const body = {
       startDate: this.getToday(),
       endDate: this.getToday(),
       entryTime: startTimeHour + ':' + startTimeMinutes,
+      exitTime: ''
     };
     console.log(body);
     // Create a time registry for current user
@@ -91,10 +98,17 @@ export class TimeRegistryComponent implements OnInit {
    */
   public submitEndDate(): void {
     const endTime = new Date().getHours().toString();
-    const endTimeMinutes = new Date().getMinutes().toString();
+    const currentEndTimeMinutes = new Date().getMinutes();
+    let endTimeMinutes = '';
+    if (currentEndTimeMinutes < 10)  {
+      endTimeMinutes = '0' +  currentEndTimeMinutes.toString();
+    } else {
+      endTimeMinutes = currentEndTimeMinutes.toString();
+    }
     const body = {
       startDate: this.getToday(),
       endDate: this.getToday(),
+      entryTime: '',
       exitTime: endTime + ':' + endTimeMinutes
     };
     console.log(body);
@@ -116,26 +130,4 @@ export class TimeRegistryComponent implements OnInit {
       + this.calendar.getToday().month.toString() + '-'
       + this.calendar.getToday().day.toString();
   }
-
-  // /**
-  //  * Request to create new registry in the server.
-  //  * TODO: For future implementation.
-  //  */
-  // public submit() {
-  //   let token = '';
-  //   const body = {
-  //     startDate: '2019-10-10',
-  //     endDate: '2019-10-10',
-  //     entryTime: '08:30',
-  //     exitTime: '14:30'
-  //   };
-  //   this.http.post(environment.API_URL + '/time-registries/', body, this.httpOptionsAuthToken)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //       console.log('Successful user create');
-  //       this.router.navigate(['/time_registry']);
-  //     }, err => {
-  //       console.log('Oooops something wrong');
-  //     });
-  // }
 }
