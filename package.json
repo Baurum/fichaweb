@@ -5,10 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "node src/index.js",
+    "build": "webpack",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
