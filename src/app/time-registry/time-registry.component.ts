@@ -65,7 +65,7 @@ export class TimeRegistryComponent implements OnInit {
    * Entry time request.
    * This request create a time registry.
    */
-  private submitStartDate(): void {
+  public submitStartDate(): void {
     const startTimeHour = new Date().getHours().toString();
     const currentStartDateMinutes = new Date().getMinutes();
     let startTimeMinutes = '';
