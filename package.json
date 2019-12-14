@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "heroku-run-build-script": true,
   "scripts": {
+    "start": "node server.js",
     "ng": "ng",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot",
-    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
