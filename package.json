@@ -4,17 +4,19 @@
   "heroku-run-build-script": true,
   "scripts": {
     "ng": "ng",
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "webpack --config webpack.config.prod.js"
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.14",
+    "@angular/cli": "^8.3.20",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
     "@angular/core": "~8.2.14",
     "@angular/forms": "~8.2.14",
     "@angular/platform-browser": "~8.2.14",
@@ -35,8 +37,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.19",
-    "@angular/cli": "^8.3.20",
-    "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
@@ -52,7 +52,8 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0"
+    "tslint": "~5.15.0",
+    "typescript": "~3.5.3"
   },
   "engines": {
     "node": "11.9.0",
