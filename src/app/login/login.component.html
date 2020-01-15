@@ -61,7 +61,7 @@
                [ngClass]="fuser.passwordConfirmation.errors">
       </label>
     </div>
-    <div class="text-danger" *ngIf="!passwordConfirm">Passwords isn't equals</div>
+    <div class="text-danger" *ngIf="!passwordConfirm">Passwords do not match</div>
     <button class="btn-primary rounded-circle"
             type="submit"
             (click)="signUpRequest()">Go!

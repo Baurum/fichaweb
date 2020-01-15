@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Show or hide Passwords isn't equals error.
+   * Show or hide Passwords do not match.
    */
   public onPasswordChange(): void {
     this.passwordConfirm = this.newUserForm.controls.password.value === this.newUserForm.controls.passwordConfirmation.value;
